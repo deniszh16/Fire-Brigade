@@ -1,16 +1,17 @@
 <dependencies>
   <packages>
-    <package>com.google.games:gpgs-plugin-support:0.10.11</package>
+    <package>com.google.games:gpgs-plugin-support:0.10.12</package>
   </packages>
   <files>
-    <file>Assets/GeneratedLocalRepo/GooglePlayGames/Editor/m2repository/com/google/games/gpgs-plugin-support/0.10.11/gpgs-plugin-support-0.10.11.aar</file>
-    <file>Assets/GeneratedLocalRepo/GooglePlayGames/Editor/m2repository/com/google/games/gpgs-plugin-support/0.10.11/gpgs-plugin-support-0.10.11.pom</file>
+    <file>Assets/GeneratedLocalRepo/GooglePlayGames/Editor/m2repository/com/google/games/gpgs-plugin-support/0.10.12/gpgs-plugin-support-0.10.12.aar</file>
+    <file>Assets/GeneratedLocalRepo/GooglePlayGames/Editor/m2repository/com/google/games/gpgs-plugin-support/0.10.12/gpgs-plugin-support-0.10.12.pom</file>
   </files>
   <settings>
     <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
     <setting name="bundleId" value="ru.cubra.firefighters" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
+    <setting name="gradlePropertiesTemplateEnabled" value="True" />
     <setting name="gradleTemplateEnabled" value="True" />
     <setting name="installAndroidPackages" value="True" />
     <setting name="localMavenRepoDir" value="Assets/GeneratedLocalRepo" />

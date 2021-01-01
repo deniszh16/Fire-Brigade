@@ -134,6 +134,12 @@ namespace UnityEngine.Purchasing
                     CodelessIAPStoreListener.Instance.ExtensionProvider.GetExtension<ISamsungAppsExtensions>()
                         .RestoreTransactions(OnTransactionsRestored);
                 }
+                else if (Application.platform == RuntimePlatform.Android &&
+                    StandardPurchasingModule.Instance().appStore == AppStore.GooglePlay)
+                {
+                    CodelessIAPStoreListener.Instance.ExtensionProvider.GetExtension<IGooglePlayStoreExtensions>()
+                        .RestoreTransactions(OnTransactionsRestored);
+                }
                 else
                 {
                     Debug.LogWarning(Application.platform.ToString() +

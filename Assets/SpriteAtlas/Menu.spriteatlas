@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Menu
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 0e17a1dd16ec8224a8124b3f794861dd, type: 3}
+    - {fileID: 2800000, guid: eaffee3e61d122e4da6f59377607de4b, type: 3}
+    - {fileID: 2800000, guid: 2052654074abc2a4b8c16a4493fa6b5e, type: 3}
+    - {fileID: 2800000, guid: 1d69a3b207b423e47afbee77264db15f, type: 3}
+    - {fileID: 2800000, guid: 434924b7392d5034db51f83ad14dce0e, type: 3}
+    - {fileID: 2800000, guid: cf7b8d715c62a264d9741af2aff21ebf, type: 3}
+    - {fileID: 2800000, guid: 944fbc5587fd2494e95c9bc5a01f44d9, type: 3}
+    - {fileID: 2800000, guid: ead09a2d3d98a3d4886f265f5cf338b0, type: 3}
+    - {fileID: 2800000, guid: eb566a1202458a44895944198612c2fc, type: 3}
+    - {fileID: 2800000, guid: b03ab8c63d216494fa1345bd5d6ee3bb, type: 3}
+    - {fileID: 2800000, guid: 98ddcb2df2b6af640829fdc072991090, type: 3}
+    - {fileID: 2800000, guid: 0277fec9af4688744ae2c3ce77d8ff91, type: 3}
+    - {fileID: 2800000, guid: 308ae88102e013542980fa2085e44fae, type: 3}
+    - {fileID: 2800000, guid: 0960790839c06d2419f19c00bf485b1c, type: 3}
+    - {fileID: 2800000, guid: 54b404b5e24bc66499f10968d4b92d96, type: 3}
+    - {fileID: 2800000, guid: 448785f9dba7253409ecd77a9d3cc325, type: 3}
+    - {fileID: 2800000, guid: 512654457771dc74fa2a3408a4b757ae, type: 3}
+    - {fileID: 2800000, guid: 29052378a22b69d41b99f9847109537a, type: 3}
+    - {fileID: 2800000, guid: 71698eb46cac57041a1ceb688121d930, type: 3}
+    totalSpriteSurfaceArea: 926032
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 2052654074abc2a4b8c16a4493fa6b5e, type: 3}
+  - {fileID: 21300000, guid: cf7b8d715c62a264d9741af2aff21ebf, type: 3}
+  - {fileID: 21300000, guid: 308ae88102e013542980fa2085e44fae, type: 3}
+  - {fileID: 21300000, guid: eb566a1202458a44895944198612c2fc, type: 3}
+  - {fileID: 21300000, guid: 1d69a3b207b423e47afbee77264db15f, type: 3}
+  - {fileID: 21300000, guid: 71698eb46cac57041a1ceb688121d930, type: 3}
+  - {fileID: 21300000, guid: 512654457771dc74fa2a3408a4b757ae, type: 3}
+  - {fileID: 21300000, guid: 944fbc5587fd2494e95c9bc5a01f44d9, type: 3}
+  - {fileID: 21300000, guid: 54b404b5e24bc66499f10968d4b92d96, type: 3}
+  - {fileID: 21300000, guid: b03ab8c63d216494fa1345bd5d6ee3bb, type: 3}
+  - {fileID: 21300000, guid: 434924b7392d5034db51f83ad14dce0e, type: 3}
+  - {fileID: 21300000, guid: 0960790839c06d2419f19c00bf485b1c, type: 3}
+  - {fileID: 21300000, guid: 29052378a22b69d41b99f9847109537a, type: 3}
+  - {fileID: 21300000, guid: 0277fec9af4688744ae2c3ce77d8ff91, type: 3}
+  - {fileID: 21300000, guid: 448785f9dba7253409ecd77a9d3cc325, type: 3}
+  - {fileID: 21300000, guid: ead09a2d3d98a3d4886f265f5cf338b0, type: 3}
+  - {fileID: 21300000, guid: 98ddcb2df2b6af640829fdc072991090, type: 3}
+  - {fileID: 21300000, guid: 0e17a1dd16ec8224a8124b3f794861dd, type: 3}
+  - {fileID: 21300000, guid: eaffee3e61d122e4da6f59377607de4b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Frame (2)
+  - Frame (5)
+  - Lock
+  - Frame (8)
+  - Frame (3)
+  - Wrench
+  - Persons
+  - Frame (6)
+  - Panel
+  - Icon
+  - Frame (4)
+  - Mask
+  - Score
+  - Loading
+  - Pause
+  - Frame (7)
+  - Info
+  - Done
+  - Frame (1)
+  m_RenderDataMap: {}
+  m_Tag: Menu
+  m_IsVariant: 0

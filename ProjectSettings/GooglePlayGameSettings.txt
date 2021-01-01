@@ -1,5 +1,5 @@
-lastUpgrade=01011
-proj.pluginVersion=0.10.11
+lastUpgrade=01012
+proj.pluginVersion=0.10.12
 proj.AppId=505850741990
 and.BundleId=ru.cubra.firefighters
 proj.classDir=Assets%5cScripts%5cMenu%5cGooglePlay

@@ -1,3 +1,121 @@
+## [2.2.5] - 2020-12-14
+
+### Fixed
+- GooglePlay - Fails to initialize when the player has made no purchases
+- GooglePlay - Missing ProcessPurchase callback at app start when the transaction is (1) purchased, (2) processed by the app with a ProcessPurchaseResult.Pending result, (3) the app is terminated, and (4) the app is restarted
+- GooglePlay - NullReferenceException from "FillPurchases" (logged internal API) when returning from background, unpredictably
+- Apple - Unity IAP 2.2.2's Apple Silicon fix not included in release; continuous integration pipeline fixed
+- `StandardPurchasingModule.appStore` returns `AppStore.MacAppStore` for Mac App Store, `AppStore.AppleAppStore` for iOS App Store, and `AppStore.WinRT` for Windows Desktop. (No change to 
+`AppStore.SamsungApps`, `AppStore.AmazonAppStore`, or `AppStore.GooglePlay`.)
+
+## [2.2.4] - 2020-12-03
+
+### Fixed
+- GooglePlay - `IStoreListener.ProcessPurchase` called more than once for any purchase which is not consumed, i.e. when `ProcessPurchaseResult.Pending` is returned, by fixing a race-condition.
+
+### Changed
+- GooglePlay - To receive `ProcessPurchase` calls after foregrounding the app, when a purchase is made outside the app (e.g. in the Play Store app), please upgrade the core package via the Package Manager to `com.unity.purchasing@2.2.1` or higher. 
+
+## [2.2.3] - 2020-12-01
+
+### Fixed
+- GooglePlay - `IStoreListener.OnInitialized` is now called after all purchases have been fetched from the store.
+- GooglePlay - `IStoreListener.OnPurchaseFailed` would not be called in projects where the purchased product's ID differed from its Store Specific ID.
+- GooglePlay - All receipts were corrupt after a purchase of a Consumable, until the next Android `Activity.onResume` lifecycle event, if the user had previously bought a Subscription.
+- GooglePlay - Fix `MissingMethodException` seen in projects using `com.unity.purchasing@2.0.3` through `2.2.0` when a user launches their game after having previously purchased a Product.
+
+## [2.2.2] - 2020-11-20
+
+### Fixed
+- Mac App Store - Support for Apple Silicon, `arm64` slice added to binary
+- GooglePlay - ProductMetadata.localizedPrice no longer floors fractions, e.g. "$19.99" was "$19.00"
+- GooglePlay - Fix several purchasing-flow issues
+   - OnPurchaseFailed not called after canceled purchase
+   - Exceptions shown in logcat after normal purchase
+   - Purchases of consumables left incomplete, resulting in "product already owned" errors
+- GooglePlay - Fix initialization when [Android] "Player Settings > Publishing Settings > Minification: Proguard" is enabled. "AndroidJavaException: java.lang.ClassNotFoundException: com.android.billingclient.api.PurchasesUpdatedListener"
+
+
+## [2.2.1] - 2020-11-13
+
+### Fixed
+- GooglePlay - ProductMetadata.localizedPrice always `0` 
+- GooglePlay - "Main" thread warning seen in IStoreListener.OnInitialized and related callbacks.
+
+### Added
+- GooglePlay - Subscription metadata is now available in `GoogleProductMetadata` from `ProductMetadata.GetGoogleProductMetadata()` via `IStoreController.products`.
+   - For example, use `GoogleProductMetadata googleMetadata = storeController.product.all[0].metadata.GetGoogleProductMetadata();` now instead of the deprecated, `IGooglePlayStoreExtensions.GetProductJSONDictionary`.
+   - string originalJson - Note, a single SkuDetails JSON, instead of multiple from `GetProductJSONDictionary` 
+   - string subscriptionPeriod
+   - string freeTrialPeriod
+   - string introductoryPrice
+   - string introductoryPricePeriod
+   - int introductoryPriceCycles
+
+## [2.2.0] - 2020-11-06
+
+### Changed
+- GooglePlay - Upgrades to Google Play Billing Library v3.0.1. This replaces the Google Play AIDL implementation.
+   - The transaction identifier is always purchaseToken. This replaces the v2.1.0 orderId behavior. See `IGooglePlayConfiguration` changes below.
+   - Adds new and deprecates `IGooglePlayStoreExtensions` APIs
+      - Deprecated - disabled.
+         - `IGooglePlayStoreExtensions.IsOwned`
+         - `IGooglePlayStoreExtensions.SetLogLevel`
+         - `IGooglePlayStoreExtensions.GetProductJSONDictionary` - use the `ProductMetadata` of `product.metadata` from `IStoreController.products`
+      - Deprecated - will be removed in future release.
+         - `IGooglePlayStoreExtensions.FinishAdditionalTransaction`
+      - New variant (signature)
+         - `IGooglePlayStoreExtensions.UpgradeDowngradeSubscription(string oldSku, string newSku, int desiredProrationMode)` - allow refined proration mode for subscription upgrade or downgrade as described in the [Google ProrationMode documentation](https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.ProrationMode)
+      - New methods
+         - `IGooglePlayStoreExtensions.ConfirmSubscriptionPriceChange(string productId, Action<bool> callback)` - prompt users to confirm a price change for their subscription
+         - `IGooglePlayStoreExtensions.SetDeferredPurchaseListener(Action<Product> action)` - listen for new pending out-of-app purchases, consider notifying users here
+         - `IGooglePlayStoreExtensions.SetObfuscatedAccountId(string accountId)` - to help Google detect and reduce irregular activities when making a purchase
+         - `IGooglePlayStoreExtensions.SetObfuscatedProfileId(string profileId)` - to help Google detect and reduce irregular activities when making a purchase
+   - deprecates `IGooglePlayConfiguration` APIs
+      - Deprecated - disabled.
+         - `IGooglePlayConfiguration.SetPublicKey`
+         - `IGooglePlayConfiguration.aggressivelyRecoverLostPurchases`
+         - `IGooglePlayConfiguration.UsePurchaseTokenForTransactionId`
+
+### Fixed
+- IAP Catalog - GooglePlay - pricing template when exporting to CSV, now sets autofill pricing to `false` instead of `true`
+- GooglePlay - Subscription receipts will update, e.g. after an upgrade or downgrade, whenever the player pauses or resumes their app. See this change reflected in the `product.receipt` of `IStoreController.products`.
+
+### Added 
+- Apple Macos - Support for building IL2CPP on MacOS
+
+## [2.1.1] - 2020-10-23
+
+### Fixed
+- Amazon - Fix build failure caused by duplicate classes
+- Amazon - Fix ResponseReceiver flaw reported by Amazon APK audit caused by permission attribute location in AndroidManifest.xml 
+
+## [2.1.0] - 2020-10-14
+### Future
+- GooglePlay - Transaction IDs for all Google Play transactions will be switched to use Google's Purchase Token in a future version of Unity IAP. Google's Order ID previously was used when possible. This version introduces a feature to switch to Purchase Token now, and also to automatically use Purchase Token if `aggressivelyRecoverLostPurchases = true`.
+
+### Changed
+
+- GooglePlay - Live payments using `aggressivelyRecoverLostPurchases = true` - switched to Google's Purchase Token from using Google's Order ID to represent all transaction IDs. Automatically sets `Product.transactionID` to GooglePlay `purchaseToken` when `aggressivelyRecoverLostPurchases` is `true`. Continues to use `orderId`, otherwise. CLARIFICATION: To reinforce the preferred usage of `aggressivelyRecoverLostPurchases`, a de-duplicating backend purchase verification server is recommended to be added to a game's transaction verification pipeline when using this feature. Without such a server the recovered purchases may not be easily or safely de-duplicated by a client.
+   - When upgrading from previous versions of Unity IAP, and if enabled `bool IGooglePlayConfiguration.aggressivelyRecoverLostPurchases`, any purchases your users have made will be processed again by Unity IAP; ProcessPurchase will be called for all these purchases.
+   - Afterwards, for future purchases, this change reduces future duplicate processing calls; ProcessPurchase should no longer be called after an interrupted purchase for an item already purcahsed by the user. 
+  - Update purchase verification servers to treat orderId and purchaseToken as the same ID. Extract the purchaseToken from the JSON receipt, or fetch the orderId using a purchaseToken and the server API [`purchases.products` Google Play Developer API](https://developers.google.com/android-publisher/api-ref/rest/v3/purchases.products). 
+  - Override this behavior with `UsePurchaseTokenForTransactionId`, below.
+- GooglePlay Security - Add GooglePlayReceipt.orderID and obsolete GooglePlayReceipt.transactionID for the local receipt validator, for clarity.
+- GooglePlay - Reduce the frequency of double-processing when a purchase is canceled, if using `aggressivelyRecoverLostPurchases = true`. Always records purchaseToken in TransactionLog when a transaction is completed.
+
+### Added
+- GooglePlay - Ability to override the `Product.transactionID` and use either Google's Purchase Token, or the legacy Order ID when possible, with `UsePurchaseTokenForTransactionId`.
+  - Call `void IGooglePlayConfiguration.UsePurchaseTokenForTransactionId(bool usePurchaseToken)` to disable the default behavior
+     - a) `false` to use the `orderId`, when possible; this is the legacy and non-unique transaction ID behavior. This must switch to the purchaseToken when the orderId is not available from Google, which is when `aggressivelyRecoverLostPurchases = true`. 
+     - b) `true` to always use the unique purchaseToken in transactionID. NOTE: this is the preferred option, and it will be the only behavior available in a future version of Unity IAP.
+  - **Background:** The GooglePlay purchaseToken is the unique identifier for all GooglePlay purchases; it is always available for all purchase types and all purchase records. The GooglePlay orderId is not available for all purchase types, notably sandbox and promo code, and also is currently not available for those purchase records which are returned for `aggressivelyRecoverLostPurchases = true` recovered purchases: the Google Play Billing history API used by this feature does not return orderId and therefore cannot be set as the Product.transactionID at that time. Historically, Unity IAP chose to prefer orderId for transactionID in its original implementation. And when the orderId was missing from purchase records (sandbox test purchases, and other no-money purchases), Unity IAP would use the purchaseToken as the transactionID. 
+  - **Impact:** Since Unity IAP version 1.23.3 this resulted in non-unique transactionIDs for purchases made which were "aggressively" restored: two distinct ProcessPurchase calls for one purchase could be generated, where Product.transactionID would change between two values (orderId and purchaseToken) and be non-unique. With this version, Unity IAP is starting a transition to only using purchaseToken, and avoids the impact for any new purchases made by a user.
+
+### Fixed
+- Receipt Validation Obfuscator - Compilation of `GoolgPlayTangle.cs` and `AppleTangle.cs` files. The generated files have been restored to their pre-2.0.0 location.
+- GooglePlay - 2020.2 support, removing usage of obsolete UnityEngine.VR.VRSettings API.
+
 ## [2.0.0] - 2020-07-15
 ### Removed
 - UnityChannel / Xiaomi - Completed deprecation, removing related APIs: `UnityEngine.Store`, `IUnityChannelExtensions`, `IUnityChannelConfiguration`.
