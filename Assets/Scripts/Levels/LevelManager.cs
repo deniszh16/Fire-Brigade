@@ -88,7 +88,6 @@ namespace Cubra.Levels
         {
             Score += value;
 
-            // Сбрасываем отрицательное значение
             if (Score < 0) Score = 0;
 
             // Сообщаем об изменении

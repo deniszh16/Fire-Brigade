@@ -26,7 +26,6 @@ namespace Cubra.Controllers
             Translations = new Dictionary<string, string>();
             TranslationUpdated.AddListener(ChangeButtonText);
 
-            // Получаем перевод
             GetTextTranslation();
         }
 
@@ -66,7 +65,6 @@ namespace Cubra.Controllers
         public void SwitchLanguage()
         {
             var language = PlayerPrefs.GetString("language");
-            // Сохраняем обновленное значение
             PlayerPrefs.SetString("language", language == "ru-RU" ? "en-US" : "ru-RU");
 
             GetTextTranslation();

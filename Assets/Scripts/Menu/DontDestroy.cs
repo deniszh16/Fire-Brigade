@@ -12,7 +12,6 @@ namespace Cubra
             // Если их больше одного, уничтожаем лишние
             if (objs.Length > 1) Destroy(gameObject);
 
-            // Отключаем уничтожение оставшегося объекта
             DontDestroyOnLoad(gameObject);
         }
     }

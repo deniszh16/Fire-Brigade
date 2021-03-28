@@ -118,7 +118,6 @@ namespace Cubra.Controllers
             }
             else
             {
-                // Перемещаем персонажей в указанном направлении с указанной скоростью
                 _rigidbody.transform.Translate(Direction * _speed * Time.fixedDeltaTime);
                 ChangeAnimation((int)Characters.Animations.Run);
             }
@@ -132,7 +131,6 @@ namespace Cubra.Controllers
             // Если персонаж на земле и не обменивается
             if (IsGroung == true && IsSwitched == false)
             {
-                // Создаем импульсный прыжок персонажей
                 _rigidbody.AddForce(new Vector2(0.5f * Direction.x, 1 * _jump), ForceMode2D.Impulse);
                 IsGroung = false;
             }

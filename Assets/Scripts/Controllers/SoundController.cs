@@ -25,7 +25,6 @@ namespace Cubra.Controllers
         /// </summary>
         public void SwitchSound()
         {
-            // Сохраняем обновленное значение
             PlayerPrefs.SetString("sounds", Activity ? "off" : "on");
             Activity = PlayerPrefs.GetString("sounds") == "on";
 

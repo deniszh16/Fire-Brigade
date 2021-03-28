@@ -117,9 +117,8 @@ namespace Cubra.Levels
 
             while (scoreLevel > 0)
             {
-                yield return new WaitForSeconds(0.003f);
+                yield return new WaitForSeconds(0.01f);
 
-                // Уменьшаем счет, увеличиваем счетчик
                 if (scoreLevel >= counterStep)
                 {
                     counter += counterStep;

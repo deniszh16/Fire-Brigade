@@ -96,7 +96,6 @@ namespace Cubra.Levels
         private void PutOutStretcher()
         {
             IsBurns = false;
-            // Сбрасываем уменьшение прочности
             StopCoroutine(ActiveCoroutine);
 
             // Записываем тушение носилок
@@ -141,8 +140,6 @@ namespace Cubra.Levels
 
             // Удаляем излишек прочности
             if (Strength > 100) Strength = 100;
-
-            // Сообщаем об изменении
             StrengthChanged?.Invoke();
         }
 
